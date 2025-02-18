@@ -15,7 +15,29 @@
 <body>
     <h2>ChatGPT response JSON to Markdown Converter</h2>
     <label for="jsonInput"><b>ChatGPT response json:</b> (Or in ChatGPT playground -> Code -> json)</label>
-    <textarea id="jsonInput" placeholder="Paste your JSON here..."></textarea>
+    <textarea id="jsonInput" placeholder='Paste your JSON here. Example:
+{
+  "messages": [
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": "How are you?"
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "type": "text",
+          "text": "I'm fine, thanks."
+        }
+      ]
+    }
+  ]
+}'></textarea>
     <br/>
 
     <input type="checkbox" id="math" name="math"/>
