@@ -1,7 +1,7 @@
 [Online tool here](https://michalfapso.github.io/chatgpt_response_json_to_markdown/index.html)
 
 ## Math notation
-By checking the "includes math" checkbox it also converts math markdown notation because the one used by ChatGPT doesn't seem to be well supported by markdown editors with a preview.
+By checking the "includes math" checkbox it also converts math markdown notation because the one used by ChatGPT doesn't seem to be well supported by markdown editors with a preview. E.g. [xyzeditor.com](https://www.xyzeditor.com), [stackedit.io](https://stackedit.io/app) or VSCode with a markdown preview extension work well.
 
 - inline from `` `2 + 2` `` to `$2 + 2$`
 - blocks from
