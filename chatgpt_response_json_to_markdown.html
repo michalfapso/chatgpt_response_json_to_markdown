@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON to Text Converter</title>
+    <style>
+        textarea {
+            width: 100%;
+            height: 200px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2>JSON to Text Converter</h2>
+    <label for="jsonInput"><b>ChatGPT response json:</b> (Or in ChatGPT playground -> Code -> json)</label>
+    <textarea id="jsonInput" placeholder="Paste your JSON here..."></textarea>
+    <br/>
+
+    <input type="checkbox" id="math" name="math"/>
+    <label for="math">Includes math</label>
+    <br/>
+    <button onclick="convertJson()">Convert</button>
+    <br/>
+    <br/>
+
+    <label for="mdOutput"><b>Output markdown:</b> (you can copy&paste it to <a href="https://www.xyzeditor.com/">xyzeditor.com</a> or <a href="https://stackedit.io/app">stackedit.io</a> or to vscode with markdown preview extension)</label>
+    <textarea id="mdOutput" placeholder="Formatted text will appear here..." readonly></textarea>
+    <br/>
+    <button onclick="copyMarkdown()">Copy Markdown</button>
+
+    <script>
+        function convertJson() {
+            try {
+                const input = document.getElementById("jsonInput").value;
+                const data = JSON.parse(input);
+                let output = "";
+                const is_math = document.getElementById("math").checked;
+                
+                data.messages.forEach(msg => {
+                    output += `# Role: ${msg.role}\n`;
+                    msg.content.forEach(content => {
+                        if (content.type === "text") {
+                            content_md = content.text
+                            if (is_math) {
+			        content_md = content_md.replaceAll('\\[', '$$$$');
+			        content_md = content_md.replaceAll('\\]', '$$$$');
+			        content_md = content_md.replaceAll(/(?<!`)`(?!`)/g, '$$');
+                            }
+                            output += `${content_md}\n\n`;
+                        }
+                    });
+                    output += "<br/><br/><br/>\n";
+                });
+                
+                document.getElementById("mdOutput").value = output.trim();
+            } catch (error) {
+                document.getElementById("mdOutput").value = "Invalid JSON!";
+            }
+        }
+
+        function copyMarkdown() {
+            document.getElementById("mdOutput").select();
+            document.execCommand('copy');
+        }
+    </script>
+</body>
+</html>
+
